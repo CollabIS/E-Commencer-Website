@@ -1,0 +1,70 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-image: url("https://mensflair.com/wp-content/uploads/2022/07/90s-mens-fashion-2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.page-header {
+    margin: 0 0 0 -5px;
+    padding: 10px;
+    background-color: #FFFFFF;
+}
+
+.right-side-header, .left-side-header {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.right-side-header div, .left-side-header div {
+    display: inline-block;
+    margin: 8px;
+}
+
+.right-side-header {
+    position: absolute;
+    right: 0;
+}
+
+.thr-photos {
+    display: flex;
+    justify-content: center;
+    margin-top: auto; /* This property may not be needed, depending on your specific layout */
+}
+
+.slick-squares {
+    list-style: none;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    bottom: 5%;
+    width: 100%;
+}
+
+.slick-squares li {
+    display: inline-block;
+    align-items: flex-end; /* This property is not valid for inline-block elements */
+    text-align: center;
+    padding: 0 5px;
+    margin-left: 5px;
+}
+img{
+    width: 100%;
+    height: auto;
+}
+
+i{
+    color: #333333;
+}
+
+.fa-regular.fa-heart.fa-lg, .fa-solid.fa-heart.fa-lg{
+    color: #ffffff;
+}
+

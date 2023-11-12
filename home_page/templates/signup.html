@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>.sing .up</title>
+    <link rel="stylesheet" href="style_login_signup.css">
+    <link rel="icon" href="https://static.planetminecraft.com/files/avatar/97925.png">
+
+    <script src="https://kit.fontawesome.com/c86366431f.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+
+    <script src="validate.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="input-login">
+            <div class="logo">
+                <a href="home_page_template.html"><h1>.s</h1></a>
+            </div>
+            <form oninput="validInputs()">
+                <div class="container-data"><input id="usrname" type="text" placeholder="Username" name="usr"
+                        required><br>
+                </div>
+                <div class="container-data"><input id="email" type="text" placeholder="Email" name="email"
+                        oninput="validateEmail()" required><br>
+                </div>
+                <div class="container-data"><input id="passwrd" type="password" placeholder="Password" name="pass"
+                        oninput="validatePass()" required><br>
+                </div>
+                <div class="container-data"><input id="passwrd-conf" type="password" placeholder="Confirm Password"
+                        name="conf-pass" required><br>
+                </div>
+                <div class="pass-req">
+                    <ul>
+                        <li id="req-12-chars"><i id="icon1" class="fa-solid fa-xmark" style="color: #ff0054;"></i> at
+                            least 12 character</li>
+                        <li id="req-special"><i id="icon2" class="fa-solid fa-xmark" style="color: #ff0054;"></i> at
+                            least
+                            one special character</li>
+                        <li id="req-upper"><i id="icon3" class="fa-solid fa-xmark" style="color: #ff0054;"></i> at least
+                            one uppercase letter</li>
+                        <li id="req-digit"><i id="icon4" class="fa-solid fa-xmark" style="color: #ff0054;"></i> at least
+                            one digit</li>
+                    </ul>
+                </div>
+                <div class="container-button"><button onclick="confirmPass()">SING UP</button></div>
+            </form>
+            <p>u have an account?<a href="login.html"> log-in</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
