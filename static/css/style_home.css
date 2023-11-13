@@ -13,6 +13,8 @@ html, body {
 }
 
 .page-header {
+    display: flex;
+    align-items: center;
     margin: 0 0 0 -5px;
     padding: 10px;
     background-color: #FFFFFF;
@@ -25,6 +27,7 @@ html, body {
 
 .right-side-header div, .left-side-header div {
     display: inline-block;
+
     margin: 8px;
 }
 
@@ -67,4 +70,24 @@ i{
 .fa-regular.fa-heart.fa-lg, .fa-solid.fa-heart.fa-lg{
     color: #ffffff;
 }
+.search{
+    background-color: #d7d7d7;
+    display: inline-flex ;
+    flex: 1 1 300px;
+    /*position: relative;*/
+    border: 0 solid;
+    padding: 4px 10px 4px 4px;
+}
 
+.input-search{
+
+    background-color: #d7d7d7;
+    border: none;
+    padding: 5px 0 5px 15px;
+    margin-right: 15px;
+
+}
+
+.input-search:focus{
+    outline: none;
+}
