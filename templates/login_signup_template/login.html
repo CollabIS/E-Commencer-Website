@@ -1,14 +1,16 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>.login</title>
-    <link rel="stylesheet" href="style_login_signup.css">
     <link rel="icon" href="https://static.planetminecraft.com/files/avatar/97925.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style_login_signup.css' %}">
 </head>
 
 <body>
@@ -16,7 +18,7 @@
     <div class="container">
         <div class="input-login">
             <div class="logo">
-                <a href="../home_template/home_page_template.html"><h1>.s</h1></a>
+                <a href="{% url 'home-page' %}"><h1>.s</h1></a>
             </div>
             <form>
                 <div class="container-data"><input type="text" placeholder="Username" name="usr" required><br>
@@ -25,7 +27,7 @@
                 </div>
                 <div class="container-button"><button>LOG IN</button></div>
             </form>
-            <p>don't have an account?<a href="signup.html"> sing-up</a></p>
+            <p>don't have an account?<a href="{% url 'signup-page' %}"> sing-up</a></p>
         </div>
     </div>
 </body>

@@ -1,9 +1,8 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <title>.sing .up</title>
-    <link rel="stylesheet" href="style_login_signup.css">
     <link rel="icon" href="https://static.planetminecraft.com/files/avatar/97925.png">
 
     <script src="https://kit.fontawesome.com/c86366431f.js" crossorigin="anonymous"></script>
@@ -12,7 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
 
-    <script src="validate.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style_login_signup.css' %}">
+
+    <script src="{% static 'js/validate.js' %}"></script>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
     <div class="container">
         <div class="input-login">
             <div class="logo">
-                <a href="../home_template/home_page_template.html"><h1>.s</h1></a>
+                <a href="{% url 'home-page' %}"><h1>.s</h1></a>
             </div>
             <form oninput="validInputs()">
                 <div class="container-data"><input id="usrname" type="text" placeholder="Username" name="usr"
@@ -50,7 +51,7 @@
                 </div>
                 <div class="container-button"><button onclick="confirmPass()">SING UP</button></div>
             </form>
-            <p>u have an account?<a href="login.html"> log-in</a></p>
+            <p>u have an account?<a href="{% url 'login-page' %}"> log-in</a></p>
         </div>
     </div>
 </body>

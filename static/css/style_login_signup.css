@@ -82,10 +82,11 @@ ul{
 
 ul li{
     color: #333333;
+    display: flex;
 }
 
 .fa-xmark,  .fa-check{
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     justify-content: center;
     width: 30px;

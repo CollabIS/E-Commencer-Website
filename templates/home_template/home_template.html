@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +8,8 @@
     <link rel="icon" href="https://static.planetminecraft.com/files/avatar/97925.png">
 
     <script src="https://kit.fontawesome.com/c86366431f.js" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style_home.css">
+    <script src="../../static/js/script.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
 
 </head>
 <body>
@@ -22,7 +24,7 @@
                 <a href="#" class="searchIcon"><i class="fa-solid fa-magnifying-glass fa-lg"></i></a>
             </div>
             <div class="shopping-bag"><a href="#"><i class="fa-solid fa-bag-shopping fa-lg"></i></a></div>
-            <div class="profile"><a href="../login_signup_template/signup.html"><i class="fa-solid fa-user fa-lg"></i></a></div>
+            <div class="profile"><a href="{% url 'signup-page' %}"><i class="fa-solid fa-user fa-lg"></i></a></div>
         </div>
     </header>
     <div class="thr-photos">
