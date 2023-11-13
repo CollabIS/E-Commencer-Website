@@ -70,6 +70,7 @@ i{
 .fa-regular.fa-heart.fa-lg, .fa-solid.fa-heart.fa-lg{
     color: #ffffff;
 }
+
 .search{
     background-color: #d7d7d7;
     display: inline-flex ;
@@ -81,6 +82,7 @@ i{
 
 .input-search{
 
+    width: 350px;
     background-color: #d7d7d7;
     border: none;
     padding: 5px 0 5px 15px;
