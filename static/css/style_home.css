@@ -1,21 +1,22 @@
+/* Resetting default styles */
 * {
     padding: 0;
     margin: 0;
 }
+
+/* Setting up the background */
 html, body {
     margin: 0;
     height: 100%;
     overflow: hidden;
-    background-image: url("https://mensflair.com/wp-content/uploads/2022/07/90s-mens-fashion-2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: url("https://mensflair.com/wp-content/uploads/2022/07/90s-mens-fashion-2.jpg") center/cover no-repeat;
 }
 
+/* Styling the page header */
 .page-header {
     display: flex;
     align-items: center;
-    margin: 0 0 0 -5px;
+    margin: 0;
     padding: 10px;
     background-color: #FFFFFF;
 }
@@ -27,7 +28,6 @@ html, body {
 
 .right-side-header div, .left-side-header div {
     display: inline-block;
-
     margin: 8px;
 }
 
@@ -36,12 +36,13 @@ html, body {
     right: 0;
 }
 
+/* Styling thumbnail photos container */
 .thr-photos {
     display: flex;
     justify-content: center;
-    margin-top: auto; /* This property may not be needed, depending on your specific layout */
 }
 
+/* Styling the bottom squares for a carousel, assuming slick is used */
 .slick-squares {
     list-style: none;
     display: flex;
@@ -53,43 +54,78 @@ html, body {
 
 .slick-squares li {
     display: inline-block;
-    align-items: flex-end; /* This property is not valid for inline-block elements */
     text-align: center;
     padding: 0 5px;
     margin-left: 5px;
 }
-img{
+
+/* Setting up responsive images */
+img {
     width: 100%;
     height: auto;
 }
 
-i{
+/* Styling icon colors */
+i {
     color: #333333;
 }
 
-.fa-regular.fa-heart.fa-lg, .fa-solid.fa-heart.fa-lg{
+.fa-regular.fa-heart.fa-lg,
+.fa-solid.fa-heart.fa-lg {
     color: #ffffff;
 }
 
-.search{
+/* Styling the search bar */
+.search {
     background-color: #d7d7d7;
-    display: inline-flex ;
+    display: inline-flex;
     flex: 1 1 300px;
-    /*position: relative;*/
     border: 0 solid;
     padding: 4px 10px 4px 4px;
 }
 
-.input-search{
-
+.input-search {
     width: 350px;
     background-color: #d7d7d7;
     border: none;
     padding: 5px 0 5px 15px;
     margin-right: 15px;
-
 }
 
-.input-search:focus{
+.input-search:focus {
     outline: none;
+}
+
+/* Styling the side bar */
+.side-bar-container {
+    background-color: black;
+    position: absolute;
+    margin: 0 !important;
+    top: 0;
+    left: 0;
+    padding: 0;
+    height: 100%;
+    width: 0;
+    transition: 0.3s ease-in;
+}
+
+.menu:hover{
+
+    .side-bar-container{
+        transition: 0.3s ease-out;
+        width: 200px;
+    }
+}
+
+.side-bar {
+    list-style: none;
+}
+
+.side-bar li {
+    margin: 15px 20px 15px 10px;
+}
+
+.side-bar li a {
+    text-decoration: none;
+    color: #f0f0f0;
 }

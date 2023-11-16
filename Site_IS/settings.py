@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'main_is.apps.MainIS',
+    'ecommencer.apps.MainIS',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
