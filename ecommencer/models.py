@@ -13,22 +13,28 @@ class Customer(models.Model):
 
 
 class Product(models.Model):
-    Size_XL = "XL"
-    Size_L = "L"
-    Size_M = "M"
-    Size_S = "S"
-    Size_XS = "XS"
+
     SIZES_CHOICES = [
-        (Size_XL, "Extra large"),
-        (Size_L, "Large"),
-        (Size_M, "Medium"),
-        (Size_S, "Small"),
-        (Size_XS, "Extra small")
+        ("XL", "Extra large"),
+        ("L", "Large"),
+        ("M", "Medium"),
+        ("S", "Small"),
+        ("XS", "Extra small")
+    ]
+
+    CATEGORY_CHOICES = [
+        ("T-SHIRT", "T-Shirt"),
+        ("JACKET", "Jacket"),
+        ("SWEATSHIRT", "Sweatshirt"),
+        ("PANTS", "Pants"),
+        ("ACCESSORIES", "Accessories")
+
     ]
 
     name = models.CharField(max_length=100, null=True)
     price = models.FloatField()
-    size = models.CharField(max_length=2, choices=SIZES_CHOICES, default=Size_M)
+    size = models.CharField(max_length=2, choices=SIZES_CHOICES, default="M")
+    category = models.CharField(max_length=12, choices=CATEGORY_CHOICES, default="T-SHIRT")
     amount = models.IntegerField()
     description = models.TextField()
 

@@ -98,34 +98,39 @@ i {
 
 /* Styling the side bar */
 .side-bar-container {
-    background-color: black;
+    background-color: #151515;
     position: absolute;
     margin: 0 !important;
-    top: 0;
     left: 0;
-    padding: 0;
-    height: 100%;
-    width: 0;
-    transition: 0.3s ease-in;
+    top: 0;
+    bottom: 0;
+    width: 180px;
+    padding: 10px;
+    transition: transform 0.3s ease;
+
 }
 
-.menu:hover{
+.side-bar{
 
-    .side-bar-container{
-        transition: 0.3s ease-out;
-        width: 200px;
+    margin-top: 50px;
+    list-style: none;
+    & li {
+        font-family: 'Roboto', sans-serif;
+        margin: 10px 0 0 15px;
+
+        & a {
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            text-decoration: none;
+            transition: 0.3s;
+            padding: 2px;
+        }
+
+        & a:hover{
+            color: #151515;
+            transition: 0.3s;
+            background-color: #f0f0f0;
+        }
     }
 }
 
-.side-bar {
-    list-style: none;
-}
-
-.side-bar li {
-    margin: 15px 20px 15px 10px;
-}
-
-.side-bar li a {
-    text-decoration: none;
-    color: #f0f0f0;
-}
