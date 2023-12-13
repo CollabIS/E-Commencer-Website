@@ -20,7 +20,8 @@
             <div class="logo">
                 <a href="{% url 'home-page' %}"><h1>.s</h1></a>
             </div>
-            <form>
+            <form method="POST">
+                {% csrf_token %}
                 <div class="container-data"><input type="text" placeholder="Username" name="usr" required><br>
                 </div>
                 <div class="container-data"><input type="password" placeholder="Password" name="pass" required><br>

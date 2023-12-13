@@ -23,7 +23,8 @@
             <div class="logo">
                 <a href="{% url 'home-page' %}"><h1>.s</h1></a>
             </div>
-            <form oninput="validInputs()">
+            <form oninput="validInputs()" method="POST">
+                {% csrf_token %}
                 <div class="container-data"><input id="usrname" type="text" placeholder="Username" name="usr"
                         required><br>
                 </div>

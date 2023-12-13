@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 from ecommencer.models import *
@@ -21,19 +22,36 @@ def home_page(request):
 
 
 def log_in_page(request):
-    return render(request, 'login_signup_template/login.html')
+    if request.method == 'POST':
+        username = request.POST.get('usr')
+        password = request.POST.get('pass')
+
+        current_customer = authenticate(request, username=username, password=password)
+
+        if current_customer is not None:
+            login(request, current_customer)
+            return redirect('home-page')
+        else:
+            print("error login")
+            return render(request, 'login_signup_template/login.html')
+
+    else:
+        return render(request, 'login_signup_template/login.html')
 
 
 def sign_up_page(request):
     if request.method == 'POST':
-        username = request.POST['usr']
-        email = request.POST['email']
-        password = request.POST['pass']
+        username = request.POST.get('usr')
+        email = request.POST.get('email')
+        password = request.POST.get('pass')
 
-        user = User.objects.create_user(username, email, password)
-        user.save()
-        customer = Customer(user)
-        customer.save()
+        new_user = User.objects.create_user(username=username, email=email, password=password)
+        new_user.save()
+
+        new_customer = Customer(user=new_user)
+        new_customer.save()
+
+        return render(request, 'login_signup_template/login.html')
 
     else:
         return render(request, 'login_signup_template/signup.html')
