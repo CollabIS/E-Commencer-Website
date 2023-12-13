@@ -19,9 +19,9 @@
 <div class="page-wrapper">
     <header class="page-header">
         <div class="left-side-header">
-            <div class="menu"><i class="fa-solid fa-bars fa-lg"></i>
+            <div class="menu"><a href="#"><i class="fa-solid fa-bars fa-lg"></i></a>
             </div>
-            <div class="logo"><a href=""><i class="fa-solid fa-skull fa-xl"></i></a></div>
+            <div class="logo"><a href="{% url 'home-page' %}"><i class="fa-solid fa-skull fa-xl"></i></a></div>
         </div>
         <div class="right-side-header">
             <div class="search">
@@ -33,14 +33,12 @@
         </div>
     </header>
     <div class="side-bar-container">
-                    <ul class="side-bar">
-                        <li><a href="#">T-SHIRTS</a></li>
-                        <li><a href="#">JEANS</a></li>
-                        <li><a href="#">KETS</a></li>
-                        <li><a href="#">HATS</a></li>
-                        <li><a href="#">ACCESSORIES</a></li>
-                    </ul>
-                </div>
+        <ul class="side-bar">
+            {% for cat in category_choices %}
+                <li><a href="{% url 'items-page' category=cat %}">{{ cat }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
     <div class="thr-photos">
         <ul class="slick-squares">
             <li><i id="hrt1" class="fa-regular fa-heart fa-lg"></i></li>

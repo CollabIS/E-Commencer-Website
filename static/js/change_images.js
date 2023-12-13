@@ -9,7 +9,7 @@ var urlsImages = [
     "https://porc.netcdn.ro/media/mageing/slider/slideritem/l/a/landing_19092023-min.jpg"
 ];
 
-var hearts = document.getElementsByClassName("fa-heart");
+var hearts;
 
 function changeImageAuto() {
     var bdy = document.body;
@@ -26,4 +26,13 @@ function changeImageAuto() {
     i = (i + 1) % urlsImages.length;
 }
 
-setInterval(changeImageAuto, 2000);
+document.addEventListener("DOMContentLoaded", function () {
+    // Get hearts after the DOM has fully loaded
+    hearts = document.getElementsByClassName("fa-heart");
+
+    // Set initial background image
+    document.body.style.backgroundImage = "url(" + urlsImages[i] + ")";
+
+    // Start the interval after the DOM has fully loaded
+    autoChangeInterval = setInterval(changeImageAuto, 2000);
+});
