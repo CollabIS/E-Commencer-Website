@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/c86366431f.js" crossorigin="anonymous"></script>
     <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/show_filter.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style_items.css' %}">
 
 </head>
@@ -31,25 +32,76 @@
             <div class="profile"><a href="{% url 'signup-page' %}"><i class="fa-solid fa-user"></i></a></div>
         </div>
     </header>
-    <div class="items-row">
-        {% for product in products %}
-            <div class="item-content">
-                <div class="product-tumb">
-                    <img src="" alt="">
+    <div class="filters-container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="filter-buttons">
+                <div data-target="size-options">SIZE</div>
+                <div data-target="color-options">COLOR</div>
+                <div data-target="price-range">PRICE</div>
+                <div onclick="submitForm()">
+                    <i class="fa-solid fa-angles-right" style="color: #000000;"></i>
                 </div>
-                <div class="product-details">
-                    <h4><a href="">{{ product.name }}</a></h4>
-                    <p>{{ product.description }}</p>
-                    <div class="product-bottom-details">
-                        <div class="product-price">${{ product.price }}</div>
-                        <div class="product-links">
-                            <a href=""><i class="fa fa-shopping-cart"></i></a>
+            </div>
+            <div class="size-options options">
+                {% for size in size_choices %}
+                    <div id="op-size">
+                        <input type="checkbox" id="{{ size }}" name="size" value="{{ size }}"
+                               {% if size in selected_size_filter %}checked{% endif %}>
+                        <label for="{{ size }}">{{ size }}</label><br>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="color-options options">
+                {% for color in color_choices %}
+                    <div id="op-color">
+                        <input type="checkbox" id="{{ color }}" name="color" value="{{ color }}"
+                               {% if color in selected_color_filter %}checked{% endif %}>
+                        <label for="{{ color }}">{{ color }}</label><br>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="price-range options">
+                <div class="min-bound">
+                    <label for="min_price">min</label>
+                    <input type="number" id="min_price" name="min_price" value="{{ selected_min_price_filter }}">
+                </div>
+                <div class="max-bound">
+                    <label for="max_price">max</label>
+                    <input type="number" id="max_price" name="max_price" value="{{ selected_max_price_filter }}">
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if products %}
+        <div class="items-row">
+            {% for product in products %}
+                <div class="item-content">
+                    <div class="product-tumb">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="img-product">
+                        {% endif %}
+                    </div>
+                    <div class="product-details">
+                        <h4>{{ product.name }}</h4>
+                        <p>{{ product.description }}</p>
+                        <div class="product-bottom-details">
+                            <div class="product-price">${{ product.price }}</div>
+                            <div class="product-links">
+                                <a href=""><i class="fa fa-shopping-cart"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 70vh;">
+            <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHZvN3lyMzZvbWJ4N3owcnF4enliaXgwZDJsZWpuYzAzYXFha29reCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26hkhPJ5hmdD87HYA/giphy.gif"
+                 style="width: 380px; height: 380px; margin-bottom: 20px;">
+            <p style="font-size: 30px; color: #555;">.empty .mt ...</p>
+        </div>
+    {% endif %}
     <div class="side-bar-container">
         <ul class="side-bar">
             {% for cat in category_choices %}

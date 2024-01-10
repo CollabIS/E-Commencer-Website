@@ -12,7 +12,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
 
-    SIZES_CHOICES = [
+    SIZE_CHOICES = [
         ("XL", "Extra large"),
         ("L", "Large"),
         ("M", "Medium"),
@@ -29,10 +29,21 @@ class Product(models.Model):
 
     ]
 
+    COLOR_CHOICES = [
+        ("WHITE", "White"),
+        ("BLACK", "Black"),
+        ("MULTICOLOR", "Multicolor"),
+        ("RED", "Red"),
+        ("BROWN", "Brown"),
+        ("BLUE", "Blue")
+    ]
+
     name = models.CharField(max_length=100, null=True)
     price = models.FloatField()
-    size = models.CharField(max_length=2, choices=SIZES_CHOICES, default="M")
+    size = models.CharField(max_length=2, choices=SIZE_CHOICES, default="M")
+    color = models.CharField(max_length=10, choices=COLOR_CHOICES, default="WHITE")
     category = models.CharField(max_length=12, choices=CATEGORY_CHOICES, default="T-SHIRT")
+    image = models.ImageField(null=True, blank=True)
     amount = models.IntegerField()
     description = models.TextField()
 
@@ -41,6 +52,12 @@ class Product(models.Model):
 
     def getCategories(self):
         return [choice[0] for choice in self.CATEGORY_CHOICES]
+
+    def getSizes(self):
+        return [choice[0] for choice in self.SIZE_CHOICES]
+
+    def getColors(self):
+        return [choice[0] for choice in self.COLOR_CHOICES]
 
 
 
