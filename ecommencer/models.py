@@ -48,7 +48,7 @@ class Product(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return self.name + " " + self.size
+        return self.name
 
     def getCategories(self):
         return [choice[0] for choice in self.CATEGORY_CHOICES]

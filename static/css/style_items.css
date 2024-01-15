@@ -136,6 +136,10 @@ i {
         margin: 50px auto;
         background: #fafafa;
 
+        #item-link {
+                text-decoration: none;
+            }
+
         & .product-tumb {
             display: flex;
             align-items: center;
@@ -167,6 +171,7 @@ i {
                 font-size: 15px;
                 line-height: 22px;
                 margin-bottom: 18px;
+                text-decoration: none;
                 color: #999;
             }
 
@@ -235,7 +240,7 @@ i {
             }
         }
 
-        & .price-range {
+        & .price-option {
             padding-top: 14px;
             padding-bottom: 4px;
 
@@ -250,8 +255,8 @@ i {
             }
         }
 
-        .color-options,
-        .size-options {
+        .color-option,
+        .size-option {
             padding-top: 14px;
             padding-bottom: 14px;
 

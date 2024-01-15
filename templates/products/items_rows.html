@@ -17,6 +17,7 @@
 </head>
 <body>
 <div class="page-wrapper">
+    <!-- items page -->
     <header class="page-header">
         <div class="left-side-header">
             <div class="menu"><a href="#"><i class="fa-solid fa-bars fa-lg"></i></a>
@@ -36,14 +37,14 @@
         <form method="post">
             {% csrf_token %}
             <div class="filter-buttons">
-                <div data-target="size-options">SIZE</div>
-                <div data-target="color-options">COLOR</div>
-                <div data-target="price-range">PRICE</div>
+                {% for filter in filters %}
+                    <div data-target="{{ filter.lower }}-option">{{ filter }}</div>
+                {% endfor %}
                 <div onclick="submitForm()">
                     <i class="fa-solid fa-angles-right" style="color: #000000;"></i>
                 </div>
             </div>
-            <div class="size-options options">
+            <div class="size-option options">
                 {% for size in size_choices %}
                     <div id="op-size">
                         <input type="checkbox" id="{{ size }}" name="size" value="{{ size }}"
@@ -52,7 +53,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="color-options options">
+            <div class="color-option options">
                 {% for color in color_choices %}
                     <div id="op-color">
                         <input type="checkbox" id="{{ color }}" name="color" value="{{ color }}"
@@ -61,7 +62,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="price-range options">
+            <div class="price-option options">
                 <div class="min-bound">
                     <label for="min_price">min</label>
                     <input type="number" id="min_price" name="min_price" value="{{ selected_min_price_filter }}">
@@ -77,21 +78,22 @@
         <div class="items-row">
             {% for product in products %}
                 <div class="item-content">
-                    <div class="product-tumb">
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="img-product">
-                        {% endif %}
-                    </div>
-                    <div class="product-details">
-                        <h4>{{ product.name }}</h4>
-                        <p>{{ product.description }}</p>
-                        <div class="product-bottom-details">
-                            <div class="product-price">${{ product.price }}</div>
-                            <div class="product-links">
-                                <a href=""><i class="fa fa-shopping-cart"></i></a>
+                    <a id="item-link" href="{% url 'product-page' prod_name=product.name prod_id=product.id %}">
+                        <div class="product-tumb">
+                            {% if product.image %}
+                                <img src="/images/{{ product.image }}" alt="img-product">
+                            {% endif %}
+                        </div>
+                        <div class="product-details">
+                            <h4>{{ product.name }}</h4>
+                            <div class="product-bottom-details">
+                                <div class="product-price">${{ product.price }}</div>
+                                <div class="product-links">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>

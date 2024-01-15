@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>.s</title>
+    <link rel="icon" href="https://static.planetminecraft.com/files/avatar/97925.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c86366431f.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style_product.css' %}">
+
+</head>
+<body>
+<div class="page-wrapper">
+    <header class="page-header">
+        <div class="left-side-header">
+            <div class="menu"><i class="fa-solid fa-bars fa-lg"></i>
+            </div>
+            <div class="logo"><a href="{% url 'home-page' %}"><i class="fa-solid fa-skull fa-xl"></i></a></div>
+        </div>
+        <div class="right-side-header">
+            <div class="search">
+                <input type="text" class="input-search">
+                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
+            <div class="shopping-bag"><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></div>
+            <div class="profile"><a href="{% url 'signup-page' %}"><i class="fa-solid fa-user"></i></a></div>
+        </div>
+    </header>
+    <div class="side-bar-container">
+        <ul class="side-bar">
+            {% for cat in categories %}
+                <li><a href="{% url 'items-page' category=cat %}">{{ cat }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="product-content">
+        <div class="p-image">
+            {% if product.image %}
+                <img src="/images/{{ product.image }}" alt="img-product">
+            {% endif %}
+        </div>
+        <div class="p-attributes">
+            <div class="p-name">{{ product.name.upper }}</div>
+            {% if product.amount %}
+                <div class="p-in-stock">IN STOCK</div>
+            {% else %}
+                <div class="p-out-of-stock">OUT OF STOCK</div>
+            {% endif %}
+            <div class="p-available-sizes">
+                <div class="size-size-x">SIZES</div>
+                <form>
+                    {% for size in available_sizes %}
+                        <div class="inp-att">
+                            <input type="radio" id="size-id" name="p-size-{{ size.lower }}" value="{{ size.size }}">
+                            <label for="{{ size.size }}">{{ size.size }}</label><br>
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+            <div class="p-available-colors">
+                <div class="color-color-x">COLORS</div>
+                <form>
+                    {% for color in available_colors %}
+                        <div class="inp-att">
+                            <input type="radio" id="color-{{ color.lower }}" name="p-color-{{ color.lower }}"
+                                   value="{{ color.color }}">
+                            <label for="{{ color.color }}">{{ color.color }}</label><br>
+                        </div>
+                    {% endfor %}
+                    <button type="submit">ADD TO BAG</button>
+                </form>
+            </div>
+            <div class="p-description">
+                {{ product.description }}
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
