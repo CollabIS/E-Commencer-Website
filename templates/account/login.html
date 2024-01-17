@@ -26,7 +26,10 @@
                 </div>
                 <div class="container-data"><input type="password" placeholder="Password" name="pass" required><br>
                 </div>
-                <div class="container-button"><button>LOG IN</button></div>
+                {% if not existing_customer%}
+                    <div class="not-customer">that's not a customer ;((( try again</div>
+                {% endif %}
+                <div class="container-button"><input type="submit" value="LOG IN"></div>
             </form>
             <p>don't have an account?<a href="{% url 'signup-page' %}"> sing-up</a></p>
         </div>

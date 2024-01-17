@@ -10,9 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/c86366431f.js" crossorigin="anonymous"></script>
-    <script src="{% static 'js/change_images.js' %}"></script>
     <script src="{% static 'js/sidebar.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
+    {% block script %}{% endblock %}
 
 </head>
 <body>
@@ -36,6 +35,7 @@
             {% endif %}
         </div>
     </header>
+    {% block content %}{% endblock %}
     <div class="side-bar-container">
         <ul class="side-bar">
             {% for cat in category_choices %}
@@ -43,15 +43,6 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="thr-photos">
-        <ul class="slick-squares">
-            <li><i id="hrt1" class="fa-regular fa-heart fa-lg"></i></li>
-            <li><i id="hrt2" class="fa-regular fa-heart fa-lg"></i></li>
-            <li><i id="hrt3" class="fa-regular fa-heart fa-lg"></i></li>
-            <li><i id="hrt4" class="fa-regular fa-heart fa-lg"></i></li>
-        </ul>
-    </div>
-
 </div>
 </body>
 </html>

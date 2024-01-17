@@ -92,3 +92,7 @@ ul li{
     width: 30px;
     height: 15px;
 }
+
+.not-customer{
+    color: #ff0054;
+}

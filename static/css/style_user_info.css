@@ -8,9 +8,6 @@
 html, body {
     margin: 0;
     height: 100%;
-    overflow: hidden;
-    background-position: center;
-    background-size: cover;
 }
 
 
@@ -34,7 +31,6 @@ html, body {
         margin: 8px;
     }
 }
-
 
 .right-side-header {
     position: absolute;
@@ -69,7 +65,7 @@ i {
 
 }
 
-.input-search:focus{
+.input-search:focus {
     outline: none;
 }
 
@@ -88,10 +84,11 @@ i {
 
 }
 
-.side-bar{
+.side-bar {
 
     margin-top: 50px;
     list-style: none;
+
     & li {
         font-family: 'Roboto', sans-serif;
         margin: 10px 0 0 15px;
@@ -104,10 +101,98 @@ i {
             padding: 2px;
         }
 
-        & a:hover{
+        & a:hover {
             color: #151515;
             transition: 0.3s;
             background-color: #f0f0f0;
+        }
+    }
+}
+
+.user-info-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    margin-top: 40px;
+    font-family: 'Roboto', sans-serif;
+
+    .username-container {
+        .username {
+
+            font-weight: bold;
+            font-size: 70px;
+        }
+
+        .log-out {
+            float: right;
+
+            & button {
+                font-weight: 800;
+                color: white;
+                background-color: #ff0054;
+                padding: 7px 8px;
+                box-shadow: 5px 5px grey;
+                cursor: pointer;
+
+
+            }
+
+        }
+    }
+}
+
+.orders-container {
+    font-family: 'Roboto', sans-serif;
+    margin: 70px 40px 0 40px;
+    .order-transaction {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        .trans-complete {
+            padding: 7px 4px;
+            &.yes {
+                color: greenyellow;
+            }
+
+            &.no {
+                color: red;
+            }
+        }
+
+        .trans-id {
+            padding: 7px 4px;
+        }
+
+    }
+
+    .order-products {
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        padding-bottom: 20px;
+        .order-details {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            .grid-cell {
+                padding: 7px 4px;
+                border-bottom: 1px solid black;
+                border-left: 1px solid black;
+            }
+        }
+    }
+
+    .column-names {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        background-color: #d2d2d2;
+        margin-bottom: 10px;
+
+        .trans-id-text,
+        .trans-complete-text,
+        .total-price-text
+        {
+            padding: 7px 4px;
+            border-right: 1px solid black
         }
     }
 }

@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.db.models import Q
 
@@ -17,13 +17,11 @@ def product_page(request, prod_name, prod_id):
     products_q_sizes = Product.objects.filter(name=prod_name).values('size').distinct()
     products_q_colors = Product.objects.filter(name=prod_name).values('color').distinct()
 
-    print(products_q_sizes)
-
     context = {
         'product': product,
 
         'categories': product_categories,
-        'available_sizes':  products_q_sizes,
+        'available_sizes': products_q_sizes,
         'available_colors': products_q_colors
     }
     return render(request, 'products/product.html', context)
@@ -50,7 +48,6 @@ def items_page(request, category):
         products = products.filter(price__lte=max_price_filter)
 
     products_v = products.values()
-    print(products_v)
 
     product_sizes = Product().getSizes()
     product_colors = Product().getColors()
@@ -77,47 +74,84 @@ def items_page(request, category):
 
 
 def home_page(request):
-    context = {'category_choices': Product().getCategories()}
+    log_user = request.user.is_authenticated
+
+    context = {'category_choices': Product().getCategories(),
+               'authenticated': log_user}
+
     return render(request, 'home/index.html', context)
 
 
 def log_in_page(request):
-    if request.user.is_authenticated:
-        return render(request, 'account/user_info.html')
-
+    context = {}
+    existing_customer = True
     if request.method == 'POST':
         username = request.POST.get('usr')
         password = request.POST.get('pass')
 
         current_customer = authenticate(request, username=username, password=password)
+        existing_customer = current_customer is not None
+        context = {
+            'existing_customer': existing_customer
+        }
 
         if current_customer is not None:
             login(request, current_customer)
             return redirect('home-page')
         else:
-            print("error login")
-            return render(request, 'account/login.html')
+            return render(request, 'account/login.html', context)
 
     else:
-        return render(request, 'account/login.html')
+        context = {'existing_customer': existing_customer}
+        return render(request, 'account/login.html', context)
+
+
+from django.db import IntegrityError
 
 
 def sign_up_page(request):
-    if request.user.is_authenticated:
-        return render(request, 'account/user_info.html')
-
     if request.method == 'POST':
         username = request.POST.get('usr')
         email = request.POST.get('email')
         password = request.POST.get('pass')
 
-        new_user = User.objects.create_user(username=username, email=email, password=password)
-        new_user.save()
+        try:
+            # Try to create a new user
+            new_user, created = User.objects.get_or_create(username=username, email=email, password=password)
 
-        new_customer = Customer(user=new_user)
-        new_customer.save()
+            # Check if the user was created (not already existing)
+            if created:
+                new_customer = Customer(user=new_user)
+                new_customer.save()
 
-        return render(request, 'account/login.html')
+                return render(request, 'account/login.html')
+            else:
+                # Handle the case when the user already exists
+                return render(request, 'account/signup.html', {'error_message': 'User already exists'})
+
+        except IntegrityError:
+            # Handle IntegrityError (e.g., duplicate key violation)
+            return render(request, 'account/signup.html', {'error_message': 'Error creating user'})
 
     else:
         return render(request, 'account/signup.html')
+
+
+def user_account(request):
+    user = request.user
+    customer = Customer.objects.filter(user=user).first()
+    orders = Order.objects.filter(customer=customer)
+    order_items = list()
+    total_price = 0.0
+    for order in orders:
+        order_items.append((order, OrderItem.objects.filter(order=order)))
+        print(order.calculate_total_price())
+    print(order_items)
+    context = {
+        'username': str(user).upper,
+        'orders':   order_items
+    }
+    if request.method == "POST":
+        logout(request)
+        return redirect('home-page')
+    return render(request, 'account/user_info.html', context)

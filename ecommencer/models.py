@@ -11,7 +11,6 @@ class Customer(models.Model):
 
 
 class Product(models.Model):
-
     SIZE_CHOICES = [
         ("XL", "Extra large"),
         ("L", "Large"),
@@ -59,6 +58,8 @@ class Product(models.Model):
     def getColors(self):
         return [choice[0] for choice in self.COLOR_CHOICES]
 
+    def getPrice(self):
+        return self.price
 
 
 class Order(models.Model):
@@ -66,9 +67,14 @@ class Order(models.Model):
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=100, null=True)
+    total_price = models.FloatField(default=0)
 
-    def __str__(self):
-        return str(self.id)
+    def calculate_total_price(self):
+        order_items = OrderItem.objects.filter(order=self)
+        total_price = sum(item.product.price * item.quantity for item in order_items)
+        self.total_price = total_price
+        self.save()
+        return total_price
 
 
 class OrderItem(models.Model):
@@ -89,4 +95,3 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
-
