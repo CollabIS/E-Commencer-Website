@@ -1,38 +1,15 @@
+{% extends "base/base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>.s</title>
-    <link rel="icon" href="https://static.planetminecraft.com/files/avatar/97925.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/c86366431f.js" crossorigin="anonymous"></script>
-    <script src="{% static 'js/sidebar.js' %}"></script>
+{% block script %}
     <script src="{% static 'js/show_filter.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/style_items.css' %}">
+{% endblock script %}
 
-</head>
-<body>
-<div class="page-wrapper">
-    <!-- items page -->
-    <header class="page-header">
-        <div class="left-side-header">
-            <div class="menu"><a href="#"><i class="fa-solid fa-bars fa-lg"></i></a>
-            </div>
-            <div class="logo"><a href="{% url 'home-page' %}"><i class="fa-solid fa-skull fa-xl"></i></a></div>
-        </div>
-        <div class="right-side-header">
-            <div class="search">
-                <input type="text" class="input-search">
-                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-            </div>
-            <div class="shopping-bag"><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></div>
-            <div class="profile"><a href="{% url 'signup-page' %}"><i class="fa-solid fa-user"></i></a></div>
-        </div>
-    </header>
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/style_items.css' %}">
+{% endblock style %}
+
+{% block content %}
     <div class="filters-container">
         <form method="post">
             {% csrf_token %}
@@ -104,13 +81,7 @@
             <p style="font-size: 30px; color: #555;">.empty .mt ...</p>
         </div>
     {% endif %}
-    <div class="side-bar-container">
-        <ul class="side-bar">
-            {% for cat in category_choices %}
-                <li><a href="{% url 'items-page' category=cat %}">{{ cat }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
+{% endblock content %}
 
 </div>
 </body>

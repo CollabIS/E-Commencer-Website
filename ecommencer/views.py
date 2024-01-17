@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.db.models import Q
+from django.db import IntegrityError
 
 from ecommencer.models import *
 
@@ -10,8 +10,6 @@ def product_page(request, prod_name, prod_id):
     product_values = Product.objects.filter(id=prod_id).values()
     product = list(product_values).pop()
 
-    product_sizes = Product().getSizes()
-    product_colors = Product().getColors()
     product_categories = Product().getCategories()
 
     products_q_sizes = Product.objects.filter(name=prod_name).values('size').distinct()
@@ -20,6 +18,7 @@ def product_page(request, prod_name, prod_id):
     context = {
         'product': product,
 
+        'category_choices': Product().getCategories(),
         'categories': product_categories,
         'available_sizes': products_q_sizes,
         'available_colors': products_q_colors
@@ -83,8 +82,6 @@ def home_page(request):
 
 
 def log_in_page(request):
-    context = {}
-    existing_customer = True
     if request.method == 'POST':
         username = request.POST.get('usr')
         password = request.POST.get('pass')
@@ -102,12 +99,8 @@ def log_in_page(request):
             return render(request, 'account/login.html', context)
 
     else:
-        context = {'existing_customer': existing_customer}
+        context = {'existing_customer': True}
         return render(request, 'account/login.html', context)
-
-
-from django.db import IntegrityError
-
 
 def sign_up_page(request):
     if request.method == 'POST':
@@ -142,15 +135,16 @@ def user_account(request):
     customer = Customer.objects.filter(user=user).first()
     orders = Order.objects.filter(customer=customer)
     order_items = list()
-    total_price = 0.0
     for order in orders:
         order_items.append((order, OrderItem.objects.filter(order=order)))
         print(order.calculate_total_price())
-    print(order_items)
+
     context = {
+        'category_choices': Product().getCategories(),
         'username': str(user).upper,
-        'orders':   order_items
+        'orders': order_items
     }
+
     if request.method == "POST":
         logout(request)
         return redirect('home-page')
