@@ -141,6 +141,7 @@ def user_account(request):
         order_items.append((order, OrderItem.objects.filter(order=order)))
 
     context = {
+        'user': user,
         'category_choices': Product().getCategories(),
         'username': str(user).upper,
         'orders': order_items
