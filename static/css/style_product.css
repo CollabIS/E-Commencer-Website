@@ -147,9 +147,16 @@ i {
         margin: 0 60px 0 20px;
         background-size: cover;
 
-        & img {
+        .p-img-cont {
+            display: flex;
+            width: 100%;
             height: 100%;
-            outline: 10px groove;
+            justify-content: center;
+            & img {
+                height: 100%;
+                outline: 10px groove;
+                box-shadow: 5px 5px #727272;
+            }
         }
 
     }
@@ -165,7 +172,11 @@ i {
 
         .p-in-stock {
             color: rgb(128, 128, 128);
-            margin-bottom: 50px;
+            margin-bottom: 40px;
+        }
+
+        .dash-line {
+            border-bottom: 4px #3a3838 dashed;
         }
 
         .p-out-of-stock {
@@ -175,13 +186,10 @@ i {
 
         .size-size-x, .color-color-x {
             font-weight: bold;
-            margin-bottom: 20px;
-            padding-left: 10px;
-            box-shadow: -7px 5px grey;
-        }
-
-        .p-available-colors {
-            padding: 40px 0;
+            margin: 10px;
+            padding: 5px;
+            box-shadow: -7px 5px #b2b2b2;
+            border: 1px #545454 solid;
         }
 
         .inp-att {
@@ -190,8 +198,12 @@ i {
             margin: 3px;
         }
 
-        .p-available-sizes, .p-available-colors {
-            & form {
+        & form {
+            .p-available-colors {
+                padding: 40px 0;
+            }
+
+            .p-available-sizes, .p-available-colors {
                 & input {
                     margin-bottom: 5px;
                     appearance: none;
@@ -219,15 +231,16 @@ i {
                     border: 0;
                     font-size: 18px;
                     margin-top: 50px;
-                    box-shadow: 5px 5px grey;
+                    box-shadow: 0 0 grey;
                     transition: 0.2s;
+                    cursor: pointer;
                 }
 
 
                 & button:hover,
                 & button:focus {
                     color: #999;
-
+                    box-shadow: 5px 5px #d3d3d3;
                 }
 
                 & button:active {

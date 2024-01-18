@@ -47,7 +47,7 @@ class Product(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def getCategories(self):
         return [choice[0] for choice in self.CATEGORY_CHOICES]
@@ -71,6 +71,7 @@ class Order(models.Model):
 
     def calculate_total_price(self):
         order_items = OrderItem.objects.filter(order=self)
+        total_price = 0.0
         total_price = sum(item.product.price * item.quantity for item in order_items)
         self.total_price = total_price
         self.save()

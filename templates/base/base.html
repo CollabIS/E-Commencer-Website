@@ -20,12 +20,12 @@
         <div class="left-side-header">
             <div class="menu"><a href="#"><i class="fa-solid fa-bars fa-lg"></i></a>
             </div>
-            <div class="logo"><a href="{% url 'home-page' %}"><i class="fa-solid fa-skull fa-xl"></i></a></div>
+            <div class="logo"><a href="{% url 'home-page' %}"><i class="fa-solid fa-fish-fins fa-flip-vertical fa-xl"></i></a></div>
         </div>
         <div class="right-side-header">
             <div class="shopping-bag"><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></div>
             {% if not authenticated %}
-                <div class="profile"><a href="{% url 'signup-page' %}"><i class="fa-solid fa-user"></i></a></div>
+                <div class="profile"><a href="{% url 'login-page' %}"><i class="fa-solid fa-user"></i></a></div>
             {% else %}
                 <div class="profile"><a href="{% url 'user-account-page' %}"><i class="fa-solid fa-user"></i></a></div>
             {% endif %}

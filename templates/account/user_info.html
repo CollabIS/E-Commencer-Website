@@ -8,7 +8,7 @@
 {% block content %}
     <div class="user-info-container">
         <div class="username-container">
-            <div class="username">.{{ username }}</div>
+            <div class="username">.{{ username }}'s</div>
             <form method="POST">
                 {% csrf_token %}
                 <span class="log-out"><button>LOG OUT</button></span>
@@ -16,32 +16,40 @@
         </div>
     </div>
     <div class="orders-container">
+        <div class="orders-text">.ORDERS</div>
         <div class="column-names">
             <div class="trans-id-text">NR.</div>
-            <div class="trans-complete-text">COMPLETE</div>
-            <div class="total-price-text">TOTAL</div>
+            <div class="trans-complete-text">COMPLETE?</div>
+            <div class="trans-total-price-text">TOTAL</div>
         </div>
+        <div class="dash-line"></div>
+        {% if orders %}
         {% for order in orders %}
-            <div class="order-transaction">
-                <div class="trans-id">{{ order.0.transaction_id }}</div>
-                {% if order.0.complete %}
-                    <div class="trans-complete yes">RECEIVED</div>
-                {% else %}
-                    <div class="trans-complete no">IN WORK</div>
-                {% endif %}
-                <div class="trans-total-price">{{ order.0.total_price }}</div>
-            </div>
-            <div class="order-products">
-                {% for order_item in order.1 %}
-                    <div class="order-details">
-                        <div class="grid-cell">{{ order_item.product }}</div>
-                        <div class="grid-cell">{{ order_item.product.size }}</div>
-                        <div class="grid-cell">{{ order_item.date_added }}</div>
-                        <div class="grid-cell">{{ order_item.product.price }}</div>
-                    </div>
-                {% endfor %}
+            <div class="order-trans-prod-container">
+                <div class="order-transaction">
+                    <div class="trans-id">{{ order.0.transaction_id }}</div>
+                    {% if order.0.complete %}
+                        <div class="trans-complete yes">COMPLETED</div>
+                    {% else %}
+                        <div class="trans-complete no">UNCOMPLETED</div>
+                    {% endif %}
+                    <div class="trans-total-price">{{ order.0.total_price }}$</div>
+                </div>
+                <div class="order-products">
+                    {% for order_item in order.1 %}
+                        <div class="order-details">
+                            <div class="grid-cell">{{ order_item.product }}</div>
+                            <div class="grid-cell">{{ order_item.product.size }}</div>
+                            <div class="grid-cell">{{ order_item.date_added }}</div>
+                            <div class="grid-cell">{{ order_item.product.price }}$</div>
+                        </div>
+                    {% endfor %}
 
+                </div>
             </div>
         {% endfor %}
+        {% else %}
+            <div class="no-orders">None, yet</div>
+        {% endif %}
     </div>
 {% endblock content %}

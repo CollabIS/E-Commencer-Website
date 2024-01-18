@@ -8,31 +8,33 @@
 {% block content %}
     <div class="product-content">
         <div class="p-image">
-            {% if product.image %}
-                <img src="/images/{{ product.image }}" alt="img-product">
-            {% endif %}
+            <div class="p-img-cont">
+                {% if product.image %}
+                    <img src="/images/{{ product.image }}" alt="img-product">
+                {% endif %}
+            </div>
         </div>
         <div class="p-attributes">
-            <div class="p-name">{{ product.name.upper }}</div>
+            <div class="p-name">{{ product.name }}</div>
             {% if product.amount %}
                 <div class="p-in-stock">IN STOCK</div>
             {% else %}
                 <div class="p-out-of-stock">OUT OF STOCK</div>
             {% endif %}
-            <div class="p-available-sizes">
-                <div class="size-size-x">SIZES</div>
-                <form>
+            <form>
+                <div class="p-available-sizes">
+                    <div class="dash-line"></div>
+                    <div class="size-size-x">SIZES</div>
                     {% for size in available_sizes %}
                         <div class="inp-att">
                             <input type="radio" id="size-id" name="p-size-{{ size.lower }}" value="{{ size.size }}">
                             <label for="{{ size.size }}">{{ size.size }}</label><br>
                         </div>
                     {% endfor %}
-                </form>
-            </div>
-            <div class="p-available-colors">
-                <div class="color-color-x">COLORS</div>
-                <form>
+                </div>
+                <div class="p-available-colors">
+                    <div class="dash-line"></div>
+                    <div class="color-color-x">COLORS</div>
                     {% for color in available_colors %}
                         <div class="inp-att">
                             <input type="radio" id="color-{{ color.lower }}" name="p-color-{{ color.lower }}"
@@ -41,12 +43,14 @@
                         </div>
                     {% endfor %}
                     <button type="submit">ADD TO BAG</button>
-                </form>
-            </div>
+                </div>
+            </form>
             <div class="p-description">
                 {{ product.description }}
             </div>
         </div>
+
+    </div>
     </div>
 {% endblock content %}
 

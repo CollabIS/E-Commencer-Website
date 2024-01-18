@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db import IntegrityError
 
 from ecommencer.models import *
@@ -7,14 +7,14 @@ from ecommencer.models import *
 
 # Create your views here.
 def product_page(request, prod_name, prod_id):
-    product_values = Product.objects.filter(id=prod_id).values()
-    product = list(product_values).pop()
+    product = get_object_or_404(Product, id=prod_id)
 
     product_categories = Product().getCategories()
 
     products_q_sizes = Product.objects.filter(name=prod_name).values('size').distinct()
     products_q_colors = Product.objects.filter(name=prod_name).values('color').distinct()
 
+    print(prod_id)
     context = {
         'product': product,
 
@@ -46,7 +46,7 @@ def items_page(request, category):
     if max_price_filter:
         products = products.filter(price__lte=max_price_filter)
 
-    products_v = products.values()
+    print(products)
 
     product_sizes = Product().getSizes()
     product_colors = Product().getColors()
@@ -55,7 +55,7 @@ def items_page(request, category):
 
     context = {
         'category': category,
-        'products': products_v,
+        'products': products,
 
         'category_choices': product_categories,
         'size_choices': product_sizes,
@@ -102,6 +102,7 @@ def log_in_page(request):
         context = {'existing_customer': True}
         return render(request, 'account/login.html', context)
 
+
 def sign_up_page(request):
     if request.method == 'POST':
         username = request.POST.get('usr')
@@ -136,8 +137,8 @@ def user_account(request):
     orders = Order.objects.filter(customer=customer)
     order_items = list()
     for order in orders:
+        order.calculate_total_price()
         order_items.append((order, OrderItem.objects.filter(order=order)))
-        print(order.calculate_total_price())
 
     context = {
         'category_choices': Product().getCategories(),
